@@ -2,6 +2,7 @@ package teacher_code;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class TeacherCode {
     public static void main(String[] args) {
@@ -74,6 +75,11 @@ public class TeacherCode {
         printArray(stringArrayList);
 
         System.out.println("stringArrayList.contains(\"four\") = " + stringArrayList.contains("four"));
+
+        // данная операция позволяет сократить размер внутреннего массива до size, то есть,
+        // внутренний массив теперь содержит только элементы, которые добавил пользователь
+        // для приложения это позволяет сэкономить память, тк уменьшает ращмер массива
+        stringArrayList.trimToSize();
     }
 
     static void printArray (ArrayList list) {

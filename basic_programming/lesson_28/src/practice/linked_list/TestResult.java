@@ -1,33 +1,77 @@
 package practice.linked_list;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ListPerformanceComparison {
-    public static void main(String[] args) {
-        int size = 100000; // Размер списка для тестирования
+public class TestResult {
+    private String testName;
+    private long arrayListTime;
+    private long linkedListTime;
 
+    public List<TestResult> getResults() {
+        return results;
+    }
+
+    private List<TestResult> results = new ArrayList<>();
+
+    public TestResult() {
+    }
+
+    public TestResult(String testName, long arrayListTime, long linkedListTime) {
+        this.testName = testName;
+        this.arrayListTime = arrayListTime;
+        this.linkedListTime = linkedListTime;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public long getArrayListTime() {
+        return arrayListTime;
+    }
+
+    public long getLinkedListTime() {
+        return linkedListTime;
+    }
+
+    public void addResult(TestResult result) {
+        results.add(result);
+    }
+
+    public TestResult getTestResults(int size) {
+        TestResult results = new TestResult();
+
+        // Для каждого теста вызываем соответствующий метод и добавляем результат
+        results.addResult(testListPerformance(size, "Добавление в конец"));
+        results.addResult(testListPerformance(size, "Добавление в начало"));
+        results.addResult(testListPerformance(size, "Удаление из начала"));
+        results.addResult(testListPerformance(size, "Доступ к элементам"));
+        results.addResult(testListPerformance(size, "Удаление из конца"));
+        results.addResult(testListPerformance(size, "Итерация по всем элементам"));
+
+        return results;
+    }
+
+    private TestResult testListPerformance(int size, String testType) {
         List<Integer> arrayList = new ArrayList<>();
         List<Integer> linkedList = new LinkedList<>();
 
-        // Тест добавления в конец
-        comparePerformance(arrayList, linkedList, size, "Добавление в конец");
+        long arrayListDuration = measurePerformance(arrayList, size, testType);
+        long linkedListDuration = measurePerformance(linkedList, size, testType);
 
-        // Тест добавления в начало
-        comparePerformance(arrayList, linkedList, size, "Добавление в начало");
-
-        // Тест удаления из начала
-        comparePerformance(arrayList, linkedList, size, "Удаление из начала");
-
-        // Тест доступа к элементам
-        comparePerformance(arrayList, linkedList, size, "Доступ к элементам");
-
-        // Тест удаления из конца
-        comparePerformance(arrayList, linkedList, size, "Удаление из конца");
-
-        // Тест итерации по всем элементам
-        comparePerformance(arrayList, linkedList, size, "Итерация по всем элементам");
+        return new TestResult(testType, arrayListDuration, linkedListDuration);
     }
+
+    private long measurePerformance(List<Integer> list, int size, String operationType) {
+        prepareList(list, size);
+        long startTime = System.nanoTime();
+        performOperation(list, size, operationType);
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
 
     private static void comparePerformance(List<Integer> arrayList, List<Integer> linkedList, int size, String testType) {
         long startTime, endTime, arrayListDuration, linkedListDuration;
