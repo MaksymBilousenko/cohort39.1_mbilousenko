@@ -1,5 +1,7 @@
 package teacher_code;
 
+import java.util.LinkedList;
+
 public class NodeExample {
     int data;
     NodeExample next;
@@ -13,6 +15,5 @@ public class NodeExample {
         this.next = next;
     }
 
-    public NodeExample() {
-    }
+
 }

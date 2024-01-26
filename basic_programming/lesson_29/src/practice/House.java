@@ -34,46 +34,56 @@ public class House {
 
 
     //хорошо и полностью определенный метод equals сравнивает по значениям всех полей в объекте
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof House)) return false;
-//
-//        House house = (House) o;
-//
-//        if (getFloor() != house.getFloor()) return false;
-//        if (Double.compare(house.getSquare(), getSquare()) != 0) return false;
-//        return getAddress().equals(house.getAddress());
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof House)) return false;
 
-    //хорошо и полностью определенный метод hashCode должен вернуть число с наибольшим распределением по значениям
-//    @Override
-//    public int hashCode() {
-//        int result;
-//        long temp;
-//        result = getFloor();
-//        result = 31 * result + getAddress().hashCode();
-//        temp = Double.doubleToLongBits(getSquare());
-//        result = 31 * result + (int) (temp ^ (temp >>> 32));
-//        return result;
-//    }
+        House house = (House) o;
+
+        if (getFloor() != house.getFloor()) return false;
+        if (Double.compare(house.getSquare(), getSquare()) != 0) return false;
+        return getAddress().equals(house.getAddress());
+    }
+
+ //   хорошо и полностью определенный метод hashCode должен вернуть число с наибольшим распределением по значениям
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getFloor();
+        String address = getAddress();
+        int addressHashCode = address.hashCode();
+
+        result = 31 * result + addressHashCode;
+
+        temp = Double.doubleToLongBits(getSquare());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 
 
     // плохо определенный метод equals
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true; // если 2 объекта имеют одинаковую ссылку
-        if (!(o instanceof House)) return false; // если o не является сущностью класса House
-
-        House house = (House) o; // создаем новый экземпляр для работы с ним
-
-        return this.getFloor() == house.getFloor() && this.getAddress().equals(house.address); // сравнение идет только по этажу, если этаж один и тот же, то считаем,
-        // что объекты равны
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true; // если 2 объекта имеют одинаковую ссылку
+//        if (!(o instanceof House)) return false; // если o не является сущностью класса House
+//
+//        House house = (House) o; // создаем новый экземпляр для работы с ним
+//
+//        return this.getFloor() == house.getFloor() && this.getAddress().equals(house.address); // сравнение идет только по этажу, если этаж один и тот же, то считаем,
+//        // что объекты равны
+//    }
+//
+//    //плохо определенный метод hashCode
+//    @Override
+//    public int hashCode() {
+//        return this.floor + (int) this.square + this.address.length();
+//    }
 
     public static void main(String[] args) {
-        House h1 = new House(12, "abc", 30.00000001);
-        House h2 = new House(12, "abc", 30.00000002);
+        House h1 = new House(12, "abc", 30.000000000001);
+        House h2 = new House(12, "abc", 30.000000000002);
 
         System.out.println(h1 == h2);
         System.out.println(h1.equals(h2));
@@ -83,9 +93,5 @@ public class House {
     }
 
 
-    //плохо определенный метод hashCode
-    @Override
-    public int hashCode() {
-        return this.floor + (int) this.square + this.address.length();
-    }
+
 }
