@@ -6,7 +6,7 @@ import java.util.*;
 
 public class TeacherCode {
     public static void main(String[] args) {
-        Map<String, String> countries = new HashMap<>();
+        Map<String, String> countries = new IdentityHashMap<>();
 
         // добавлять можно исключительно парой -
         // нельзя добавить только ключ или только значение
@@ -41,7 +41,15 @@ public class TeacherCode {
 
         // пытаемся положить странные значения в мапу:
         countries.put("Italy", null);
-        countries.put(null, "Rome");
+
+        // не все мапы поддерживают значение null, в качестве ключа
+        try {
+            countries.put(null, "Rome");
+        } catch (RuntimeException e) {
+            System.out.println(countries.getClass().getSimpleName() +
+                    " не поддерживает добавление null в качестве ключа");
+        }
+
         // countries.put(null, null);
 
         // если попытаться положить в мапу новую пару с уже имеющимся ключом, но новым значением,
@@ -49,9 +57,12 @@ public class TeacherCode {
         countries.put("Germany", "Munich");
         printMap(countries);
 
-        System.out.println("countries.get(null) = " + countries.get(null));
-
-
+        try {
+            System.out.println("countries.get(null) = " + countries.get(null));
+        } catch (Exception e) {
+            System.out.println(countries.getClass().getSimpleName() +
+                    " не поддерживает операцию получение значения по null в качестве ключа");
+        }
     }
 
     //Метод для распечатки мап
