@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class BinarySearch {
     public static void main(String[] args) {
-        int[] array = createSortedArray(100_000_000);
-        int element = -31_466_239;
+        int[] array = createSortedArray(20);
+        int element = 2;
 
         // System.nanoTime() - возвращает текщее время в наносекнудах
         long startSearching = System.nanoTime();
