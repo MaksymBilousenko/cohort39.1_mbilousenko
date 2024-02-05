@@ -1,6 +1,7 @@
 package practice.serializable;
 
 import java.io.*;
+import java.util.Collection;
 
 public class SerializationDemo {
     public static void main(String[] args) {
@@ -17,6 +18,7 @@ public class SerializationDemo {
         UserProfile deserializedUser = deserialize(fileName);
 
         System.out.println("Deserialized User Profile: " + deserializedUser);
+
     }
 
     public static void serialize(UserProfile userProfile, String filename) {
