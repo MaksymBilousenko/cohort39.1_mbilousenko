@@ -27,6 +27,8 @@ public class TeacherCode {
         System.out.println(stack.contains(70));
         // search - возвращает количество вызвовов метода pop, чтобы добраться до элемента
         System.out.println(stack.search(3));
+
+
         // pop - возвращает элемент с вершины стека, удаляя его из стека
         System.out.println(stack.pop()); // получили 7, тк это была вершина стека. Осталось: [1, 2, 3, 4]
         System.out.println(stack.pop()); // получили 4, тк это была вершина стека. Осталось: [1, 2, 3]
@@ -46,6 +48,7 @@ public class TeacherCode {
         stack.push(34);
         stack.push(76);
         stack.push(14);
+        stack.push(null);
         stack.push(90);
 
         System.out.println(stack);
@@ -64,11 +67,24 @@ public class TeacherCode {
 
         // но тк основная задача стека - возвращать элемент с вершины стека, самым логичным кажется следущий цикл:
         while (!stack.isEmpty()) { // пока (!стек.пуст), те пока стек не пустой
-            int x = stack.pop();
+            Integer x = stack.peek();
             System.out.print(stack.pop() + " "); // возвращает вершину стека, удаляя ее из стека.
-
         }
         System.out.println();
+        System.out.println(stack);
+
+
+        stack.add(10);
+        stack.add(10);
+        stack.add(20);
+        stack.add(10);
+        stack.add(30);
+
+        for (int i = 0; i < stack.size(); i++) {
+            System.out.print(stack.get(i) + " ");
+        }
+        System.out.println();
+
         System.out.println(stack);
     }
 }

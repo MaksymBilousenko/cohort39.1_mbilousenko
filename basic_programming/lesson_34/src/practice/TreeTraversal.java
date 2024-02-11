@@ -36,7 +36,7 @@ public class TreeTraversal {
         root.right.right.left = new Node(14);
         root.right.right.right = new Node(15);
 
-        dfs(root);
+        //dfs(root);
         bfs(root);
     }
 
