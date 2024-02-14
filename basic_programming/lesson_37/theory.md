@@ -3,13 +3,14 @@
 
 # Functional Interface in Java
 
-A functional interface in Java is an interface that contains exactly one abstract method. It can also contain one or
-more default methods or static methods. Functional interfaces are the basis of lambda expressions in Java 8 and above.
+A functional interface in Java is an interface that contains exactly one abstract method. It can also contain
+one or more default methods or static methods. Functional interfaces are the basis
+of lambda expressions in Java 8 and above.
 
 ## Defining The Functional Interface
 
-The annotation `@FunctionalInterface` is used to define the functional interface. This annotation is optional, but it
-helps the compiler to throw an error if the interface does not meet the definition of a functional interface.
+The annotation `@FunctionalInterface` is used to define the functional interface. This annotation is optional,
+but it helps the compiler to throw an error if the interface does not match the definition of a functional interface.
 
 ```java 
 
@@ -21,19 +22,21 @@ public interface MyFunctionalInterface {
 
 ## Using The Functional Interface
 
-Functional interfaces can be used to create functional interface objects using lambda expressions, method references, or
-constructors.
+Functional interfaces can be used to create functional interface objects using
+lambda expressions, method references, or constructors.
 
 ### Lambda expressions
 
 ```java
-MyFunctionalInterface myFunc = () -> System.out.println("Hello World!");
-myFunc.
-
-myAbstractMethod();  // Output: Hello World!
+public class FunctionExample {
+  public static void main(String[] args) {
+    MyFunctionalInterface myFunc = () -> System.out.println("Hello World!");
+    myFunc.myAbstractMethod();  // Output: Hello World!
+  }
+}
 ```
 
-### References to methods
+### Links to methods
 
 ```java
 public class Example {
@@ -48,7 +51,7 @@ public class Example {
 }
 ```
 
-### References to constructors
+### Links to constructors
 
 ```java
 public class MyClass {
@@ -65,8 +68,8 @@ public class MyClass {
 
 ## Predefined Functional Interfaces in Java
 
-Java offers a set of predefined functional interfaces, such as `Function`, `Consumer`, `Supplier`, `Predict`, etc.,
-which simplifies working with functional programming.
+Java offers a set of predefined functional interfaces such
+as `Function`, `Consumer`, `Supplier`, `Predict`, etc., which simplifies the work with functional programming.
 
 ### Example of using the Function interface
 
@@ -83,14 +86,14 @@ public class FunctionExample {
 }
 ```
 
-## Comparison Table and examples for Function, Consumer, Supplier and Predict in Java
+## Comparison table and examples for Function, Consumer, Supplier and Predicate in Java
 
-| Interface | Description                                             | Method              | Example                                                                                                     |
-|-----------|---------------------------------------------------------|---------------------|-------------------------------------------------------------------------------------------------------------|
-| Function  | Takes one argument and returns the result.              | `R apply(T t)`      | #CODE `Function<String, Integer> func = String::length; int length = func.apply("Hello"); // Output: 5`     |
-| Consumer  | Accepts a single argument and does not return a result. | `void accept(T t)`  | #CODE `Consumer<String> consumer = System.out::println; consumer.accept("Hello"); // Output: Hello`         |
-| Supplier  | Accepts no arguments, but returns the result.           | `T get()`           | #CODE `Supplier<String> supplier = () -> "Hello"; String str = supplier.get(); // Output: Hello`            |
-| Predicate | Takes one argument and returns boolean.                 | `boolean test(T t)` | #CODE `Predicate<String> predicate = String::isEmpty; boolean result = predicate.test(""); // Output: true` |
+| Interface | Description | Method | Example |
+|-------------|----------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------|
+| `Function`  | Takes one argument and returns the result.    | `R apply(T t)`      | ``` Function<String, Integer> func = String::length; int length = func.apply("Hello"); // Output: 5``` |
+| `Consumer`  | Takes one argument and does not return a result. | `void accept(T t)`  | `Consumer<String> consumer = System.out::println; consumer.accept("Hello"); // Output: Hello`          |
+| `Supplier`  | Does not accept arguments, but returns a result.  | `T get()`           | `Supplier<String> supplier = () -> "Hello"; String str = supplier.get(); // Output: Hello`             |
+| `Predicate` | Takes one argument and returns `boolean'.    | `boolean test(T t)` | `Predicate<String> predicate = String::isEmpty; boolean result = predicate.test(""); // Output: true`  |
 
 ## Usage examples
 
@@ -156,203 +159,6 @@ public class PredicateExample {
     }
 }
 ```
-
-# Stream API. Introduction to Functional Programming and Stream API in Java
-
-Data processing is a standard task in development. Previously, it was necessary to use loops or recursive functions for
-this. With the advent of the Java 8 Stream API, the data processing process has accelerated significantly. This language
-tool allows you to describe how to process data, briefly and succinctly.
-
-## What is the Java Stream API
-
-It is a Java language tool that allows you to use a functional style when working with different data structures.
-
-To begin with, the stream needs a source from which it will receive objects. Most often these are collections, but not
-always. For example, you can take as a source a generator that has rules for creating objects.
-
-The data in the stream is processed on intermediate operations. For example: we can filter the data, skip a few
-elements, limit the selection, perform sorting. Then a terminal operation is performed. It absorbs the data and outputs
-the result.
-
-## Stream on the example of a simple task
-
-For clarity, let's look at the example of using streams in comparison with the old solution of a similar problem.
-
-The task is to find the sum of odd numbers in the collection.
-
-```java
-Integer odd = collection.stream().filter(p -> p % 2 != 0).reduce((c1, c2) -> c1 + c2).orElse(0);
-```
-
-Here we see a functional style. Without streams, the same task has to be solved through the use of the loop:
-
-```java
-Integer oldOdd = 0;
-for(
-Integer i:collection){
-        if(i %2!=0){
-oldOdd +=i;
-}
-        }
-```
-
-Yes, at first glance, the cycle looks more understandable. But this is a matter of experience interacting with streams.
-Very quickly you get used to the fact that you can process data without using cycles.
-
-## Advantages of Stream
-
-Thanks to streams, you no longer need to write stereotypical code every time you have to do something with data: sort,
-filter, transform. Developers think less about the standard implementation and spend more time on more complex things.
-
-##### A few more advantages of streams:
-
-- Support for weak connectivity. The less classes know about each other, the better.
-- Parallelizing operations with collections has become easier. Where previously it would have been necessary to cycle,
-  streams significantly reduce the amount of code.
-- Methods
-
-The `Stream API` does not modify the original collections, reducing the number of side effects.
-Even complex data processing operations thanks to the `Stream API`
-The `Stream API` looks concise and clear. In general, it becomes more convenient to write, and easier to read.
-
-## How to create streams
-
-#### The table below shows the main ways to create streams.
-
-| Source                                  | Method                                 | Example                                                                                                                       |
-|-----------------------------------------|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Collection                              | `collection.stream()`                  | ```java Collection<String> collection = Arrays.asList("f5", "b6", "z7"); Stream<String> collectionS = collection.stream();``` |
-| Values                                  | `Stream.of(v1,... vN)`                 | ``java Stream<String> valuesS = Stream.of("f5", "b6", "z7");``                                                                |
-| Primitives                              | `IntStream.of(1, ... N)`               | ```java IntStream intS = IntStream.of(9, 8, 7);```                                                                            |
-|                                         | `DoubleStream.of(1.1, … N)`            | ```java DoubleStream doubleS = DoubleStream.of(2.4, 8.9);```                                                                  |
-| Array                                   | `Arrays.stream(arr)`                   | ``java String[] arr = {"f5","b6","z7"}; Stream<String> arrS = Arrays.stream(arr);``                                           |
-| File — each new line becomes an element | `Files.lines(file_path)`               | ``java Stream<String> fromFileS = Files.lines(Paths.get("doc.txt "))``                                                        |
-| Stream.builder                          | `Stream.builder().add(...)....build()` | ```java Stream.builder().add("f5").add("b6").build();```                                                                      |
-
-## Streaming Methods
-
-There are two types of methods available in the Stream API — pipeline and terminal. In addition, there are a number of
-special methods for working with numeric streams and several methods for checking parallelism /consistency. But this is
-a formal separation.
-
-There can be many pipeline methods in the stream. There is only one terminal method. After its execution, the stream
-ends.
-
-Nothing happens until you call the terminal method. That's because conveyor methods are lazy. This means that they are
-processing data and waiting for a command to pass it to the terminal method. We recommend not to be lazy as pipeline
-methods, but to be trained in order to have full knowledge to work with the Java Stream API.
-
-### Conveyor
-
-| Method     | Description                                                                                     | Usage                                                                                                                | Example |
-|------------|-------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------|
-| `filter`   | Works as a filter, returning values that fit the specified condition                            | `collection.stream().filter("e22"::equals).count();`                                                                 |
-| `sorted`   | Sorts the elements in natural order; can use `Comparator`                                       | `collection.stream().sorted().collect(Collectors.toList());`                                                         |
-| `limit`    | Limits output by the specified amount                                                           | `collection.stream().limit(10).collect(Collectors.toList());`                                                        |
-| `skip`     | Skips the specified number of elements                                                          | `collection.stream().skip(3).findFirst().orElse("4");`                                                               |
-| `distinct` | Finds and removes repeated elements; returns elements without repetitions                       | `collection.stream().distinct().collect(Collectors.toList());`                                                       |
-| `peek`     | Performs an action on each element of the elements, returns a stream with the original elements | `collection.stream().map(String::toLowerCase).peek((e) -> System.out.print("," + e)). collect(Collectors.toList());` |
-| `map`      | Performs actions on each element; returns elements with function results                        | `Stream.of("3", "4", "5").map(Integer::parseInt).map(x -> x + 10).forEach(System.out::println);`                     |
-| `MapPoint` | Works as `map`, only returns numeric `stream`                                                   | `collection.stream().mapToInt((s) -> Integer.parseInt(s)).toArray();`                                                |
-| `flatMap`  | Works as a `map`, but converts one element to zero, one or many others                          | `collection.stream().flatMap((p) -> Arrays.asList(p.split(",")).stream()).toArray(String[]::new);`                   |
-
-### Terminal
-
-| Method           | Description                                                                        | Usage                                                                               | Example |
-|------------------|------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|---------|
-| `findFirst`      | Returns the element corresponding to the condition that stands first               | `collection.stream().findFirst().orElse("10");`                                     |
-| `findAny`        | Returns any element matching the condition                                         | `collection.stream().findAny().orElse("10");`                                       |
-| `collect`        | Collects the processing results in a collection and not only                       | `collection.stream().filter((s) -> s.contains("10")).collect(Collectors.toList());` |
-| `count`          | Counts and outputs how many elements correspond to the condition                   | `collection.stream().filter("f5"::equals).count();`                                 |
-| `anyMatch`       | Returns true when at least one element meets the conditions                        | `collection.stream().anyMatch("f5"::equals);`                                       |
-| `noneMatch`      | Returns true when no element matches the conditions                                | `collection.stream().noneMatch("b6"::equals);`                                      |
-| `allMatch`       | Returns true when all elements meet the conditions                                 | `collection.stream().allMatch((s) -> s.contains("8"));`                             |
-| `min`            | Finds the smallest element using the passed comparator                             | `collection.stream().min(String::compareTo).get();`                                 |
-| `max`            | Finds the largest element using the passed comparator                              | `collection.stream().max(String::compareTo).get();`                                 |
-| `forEach`        | Applies the function to all elements, but cannot guarantee the order of execution  | `set.stream().forEach((p) -> p.append("_2"));`                                      |
-| `forEachOrdered` | Applies the function to all elements in turn, the order of execution can guarantee | `list.stream().forEachOrdered((p) -> p.append("_nv"));`                             |
-| `toArray`        | Brings the stream values to the array                                              | `collection.stream().map(String::toLowerCase).toArray(String[]::new);`              |
-| `reduce`         | Converts all elements into one object                                              | `collection.stream().reduce((c1, c2) -> c1 + c2).orElse(0);`                        |
-
-### Pipeline operations process data and pass it further down the pipeline without terminating the stream, while terminal operations process data and return the result, terminating the stream.
-
-#### Examples Of Pipeline Operations:
-
-- filter:
-
-```java
-List<String> myList = Arrays.asList("a1", "a2", "b1", "c2", "c1");
-   myList
-           .
-
-stream()
-   .
-
-filter(s ->s.
-
-startsWith("c"))
-        .
-
-map(String::toUpperCase)
-   .
-
-sorted()
-   .
-
-forEach(System.out::println);  // Output: C1 C2
-```
-
-- map:
-
-```java
-myList
-        .stream()
-    .
-
-map(String::toUpperCase)
-    .
-
-sorted((a, b) ->b.
-
-compareTo(a))
-        .
-
-forEach(System.out::println);  // Output: C2 C1 B1 A2 A1
-```
-
-#### Examples Of Terminal Operations:
-
-- forEach:
-
-```java
-myList
-        .stream()
-    .
-
-filter(s ->s.
-
-startsWith("a"))
-        .
-
-forEach(System.out::println);  // Output: a1 a2
-```
-
-- collect:
-
-```java
-List<String> result
-List =myList
-        .
-
-stream()
-    .
-
-map(String::toUpperCase)
-    ..
-
-collect(Collectors.toList());  // result List: [A1, A2, B1, C2, C1]
-```
-
 </details>
 
 -------------------------------------

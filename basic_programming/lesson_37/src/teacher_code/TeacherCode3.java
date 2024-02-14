@@ -27,11 +27,9 @@ public class TeacherCode3 {
 
         Comparator<House> compareByFloorAscLambda = (house1, house2) -> house1.getFloor() - house2.getFloor();
 
-
         houses.sort((house1, house2) -> house1.getFloor() - house2.getFloor());
 
-        for (House house : houses) {
-            System.out.println(house);
-        }
+
+
     }
 }
