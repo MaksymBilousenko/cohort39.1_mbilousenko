@@ -16,15 +16,23 @@ public class Classwork {
     // Задача 1: Найти максимальный элемент в списке.
     static void first() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        Stream<Integer> stream = list.stream();
+         Integer max = stream.max((el1, el2) ->el1 - el2).get();
+        System.out.println(max);
+
+        stream = list.stream();
+        Integer secondMax = stream.filter(e1 -> e1 != max)
+                .max((el1, el2) ->el1 - el2).get();
+        System.out.println("secondMax = " + secondMax);
 
         // С использованием цикла:
-        int max = Integer.MIN_VALUE;
+        int max1 = Integer.MIN_VALUE;
         for (int num : list) {
-            if (num > max) {
-                max = num;
+            if (num > max1) {
+                max1 = num;
             }
         }
-        System.out.println(max);  // Output: 5
+        System.out.println(max1);  // Output: 5
 
         // решить с помощью mapToInt и max
         int maxStream = Integer.MIN_VALUE;
@@ -49,7 +57,6 @@ public class Classwork {
 
 
         // решить с помощью collect и Collectors.joining(", ")
-
 
 
         String resultStream = null;
