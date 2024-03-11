@@ -2467,15 +2467,17 @@ public class SynchronizedExample {
 освобождаются мониторы в обратном порядке:
 
 ```java
-Object LOCK_A=new Object();
-        Object LOCK_B=new Object();
-        Object LOCK_C=new Object();
-synchronized(LOCK_A){
-synchronized(LOCK B){
-synchronized(LOCK_C){
+public class MyClass {
+    Object LOCK_A = new Object();
+    Object LOCK_B = new Object();
+    Object LOCK_C = new Object();
+    synchronized(LOCK_A){
+        synchronized (LOCK B){
+        synchronized (LOCK_C) {
         }
-        }
-        }
+    }
+    }
+}
 ```
 
 ### Методы управления блокировкой потоков. `wait(),` `notify()` и `notifyAll()`
